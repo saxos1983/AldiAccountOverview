@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using MonoTouch.Dialog;
 
 namespace AldiAccountOverview.iOS
 {
@@ -13,7 +14,7 @@ namespace AldiAccountOverview.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : UIApplicationDelegate
     {
-        // class-level declarations
+		public static UINavigationController navCtrl;
 
         public override UIWindow Window
         {
@@ -46,5 +47,18 @@ namespace AldiAccountOverview.iOS
         public override void WillTerminate(UIApplication application)
         {
         }
+
+		public override bool FinishedLaunching (UIApplication application, NSDictionary options)
+		{
+			var loginViewController = new LoginViewController();
+
+			navCtrl = new UINavigationController (loginViewController);
+
+			Window.RootViewController = navCtrl;
+
+			Window.MakeKeyAndVisible ();
+
+			return true;
+		}
     }
 }
