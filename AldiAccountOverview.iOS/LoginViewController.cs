@@ -11,6 +11,7 @@ using AldiAccountOverview.Core;
 using MonoTouch.Dialog;
 using System.Threading.Tasks;
 using CoreGraphics;
+using System.Threading;
 
 namespace AldiAccountOverview.iOS
 {
@@ -21,6 +22,8 @@ namespace AldiAccountOverview.iOS
 		BooleanElement remeberMeBooleanElement;
 		UpdateableStringElement statusElement;
 
+		CancellationTokenSource cts;
+
 		ICredentialsStore credentialsStore;
 		ILoginService loginService;
 
@@ -28,6 +31,8 @@ namespace AldiAccountOverview.iOS
 		{
 			this.credentialsStore = credentialsStore;
 			this.loginService = loginService;
+
+			cts = new CancellationTokenSource ();
 
 			this.Title = "Login";
 
@@ -52,12 +57,10 @@ namespace AldiAccountOverview.iOS
 			};
 		}
 
-		Action cancelButtonClicked =() => Console.WriteLine ("cancelButtonClicked");
-
 		private async void Login()
 		{
 			statusElement.UpdateValue("Login Started");
-			LoadingOverlay loadingOverlay = new LoadingOverlay (UIScreen.MainScreen.Bounds, "Logging in...", cancelButtonClicked, "Cancel");
+			LoadingOverlay loadingOverlay = new LoadingOverlay (UIScreen.MainScreen.Bounds, "Logging in...", () => cts.Cancel(), "Cancel");
 			this.View.Add (loadingOverlay);
 
 			// If you are not awaiting the login task and use continue with, you need to use BeginInvokeOnMainThread
@@ -76,11 +79,25 @@ namespace AldiAccountOverview.iOS
 			// Here we are awaiting the login task. InvokeOnMainThread is not required because when an awaited task 
 			// completes the method continues on the calling thread (UI Thread).
 
-			bool result = await this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password);
-			statusElement.UpdateValue("Login ended. Successful: " + result);
-			loadingOverlay.Hide ();
-			SaveCredentialsIfRequested ();
-			NavigationController.PushViewController (new RemainingPromotionsController (), false);
+			//bool result = await this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password, cts.Token);
+			bool result = false;
+			var loginTask = this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password, cts.Token);
+
+			try{
+				result = await loginTask;
+			} catch(TaskCanceledException e) {
+				statusElement.UpdateValue("Task Cancelled. Successful: " + result);
+			} finally{
+				loadingOverlay.Hide ();
+				cts = new CancellationTokenSource ();
+			}
+
+			if (result) {
+				statusElement.UpdateValue("Login ended. Successful: " + result);
+				SaveCredentialsIfRequested ();
+				NavigationController.PushViewController (new RemainingPromotionsController (), true);
+			}
+
 			Console.WriteLine ("Exiting Login Method.");
 		}
 

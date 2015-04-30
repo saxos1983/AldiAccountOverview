@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace AldiAccountOverview.Core
 {
@@ -15,10 +16,10 @@ namespace AldiAccountOverview.Core
 
 		public event LoginEndedDelegate LoginEnded;
 
-		public async Task<bool> Login (string username, string password)
+		public async Task<bool> Login (string username, string password, CancellationToken token)
 		{
 			//this.LoginStarted (this, EventArgs.Empty);
-			await Task.Delay(20000);
+			await Task.Delay(8000, token);
 			//this.LoginEnded (true);
 
 			return true;
