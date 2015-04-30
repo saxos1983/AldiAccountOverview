@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 2012
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldiAccountOverview.iOS", "AldiAccountOverview.iOS\AldiAccountOverview.iOS.csproj", "{D210BF71-482B-47BD-BFF8-74AFA6B9C2B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldiAccountOverview.Core", "AldiAccountOverview.Core\AldiAccountOverview.Core.csproj", "{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AldiAccountOverview.iOSTest", "AldiAccountOverview.iOSTest\AldiAccountOverview.iOSTest.csproj", "{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +21,38 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Release|iPhone.Build.0 = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Ad-Hoc|iPhoneSimulator.Build.0 = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.AppStore|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.AppStore|iPhoneSimulator.Build.0 = Ad-Hoc|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Debug|iPhone.Build.0 = Debug|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Release|iPhone.ActiveCfg = Release|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Release|iPhone.Build.0 = Release|iPhone
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{6E313E1F-8B45-437E-A0A5-CDEAF6E97DA0}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{D210BF71-482B-47BD-BFF8-74AFA6B9C2B7}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
 		{D210BF71-482B-47BD-BFF8-74AFA6B9C2B7}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
 		{D210BF71-482B-47BD-BFF8-74AFA6B9C2B7}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Ad-Hoc|iPhoneSimulator

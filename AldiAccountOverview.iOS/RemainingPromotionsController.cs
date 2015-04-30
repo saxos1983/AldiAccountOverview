@@ -28,7 +28,7 @@ namespace AldiAccountOverview.iOS
 
 			// Register the TableView's data source
 			string[] items = new string[] {"SMS 100 pcs", "National 1399mins"};
-			TableView.Source = new RemainingPromotionsSource (items, this);
+			TableView.Source = new RemainingPromotionsSource (items);
 		}
 	}
 }

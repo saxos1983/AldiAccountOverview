@@ -7,6 +7,7 @@ using MonoTouch.Dialog;
 
 using Foundation;
 using UIKit;
+using AldiAccountOverview.Core;
 
 namespace AldiAccountOverview.iOS
 {
@@ -15,77 +16,64 @@ namespace AldiAccountOverview.iOS
 		EntryElement username, password;
 		bool saveCredentials;
 		BooleanElement remeberMeBooleanElement;
+		StringElement statusElement;
 
-		private const string RememeberCredentialsKey  = "RememeberCredentialsKey";
-		private const string UsernameKey  = "UsernameKey";
-		private const string PasswordKey  = "PasswordKey";
+		ICredentialsStore credentialsStore;
+		ILoginService loginService;
 
-
-
-		public LoginViewController () : base (UITableViewStyle.Grouped, null)
+		public LoginViewController (ICredentialsStore credentialsStore, ILoginService loginService) : base (UITableViewStyle.Grouped, null)
 		{
+			this.credentialsStore = credentialsStore;
+			this.loginService = loginService;
+
 			this.Title = "Login";
 
 			Root = new RootElement (this.Title) {
 				new Section("Credentials")
 				{
-					(username = new EntryElement("Username", "Who are you?", GetLoadedUsername())),
-					(password = new EntryElement("Password", "", GetLoadedPassword(), true)),
+					(username = new EntryElement("Username", "Who are you?", this.credentialsStore.Username)),
+					(password = new EntryElement("Password", "", this.credentialsStore.Password, true)),
 				}, new Section() {
-					(remeberMeBooleanElement = new BooleanElement("Remember me", UserWantsToRememberCredentials())),
+					(remeberMeBooleanElement = new BooleanElement("Remember me", this.credentialsStore.ShouldRememberCredentials)),
 					new StringElement("Login", Login),
+					(statusElement = new StringElement("Status: ", "Ready")),
 				}
 			};
 
 			remeberMeBooleanElement.ValueChanged += (sender, e) => {
-				NSUserDefaults.StandardUserDefaults.SetBool(remeberMeBooleanElement.Value, RememeberCredentialsKey);
-				if(!UserWantsToRememberCredentials())
+				this.credentialsStore.ShouldRememberCredentials = remeberMeBooleanElement.Value;
+				if(!this.credentialsStore.ShouldRememberCredentials)
 				{
-					ClearCredentials();
+					this.credentialsStore.ClearCredentials();
 				}
 			};
 		}
 
 		private void Login()
 		{
-			string loginData = string.Format ("Username: {0}, Password: {1}", username.Value, password.Value);
-			if (UserWantsToRememberCredentials()) {
-				SaveCredentials (username.Value, password.Value);
-			}
-			NavigationController.PushViewController(new RemainingPromotionsController(), false);
-		}
-
-		private string GetLoadedUsername()
-		{
-			return NSUserDefaults.StandardUserDefaults.StringForKey (UsernameKey);
-		}
-
-		private string GetLoadedPassword()
-		{
-			return NSUserDefaults.StandardUserDefaults.StringForKey (PasswordKey);
-		}
-
-		private bool UserWantsToRememberCredentials()
-		{
-			return NSUserDefaults.StandardUserDefaults.BoolForKey (RememeberCredentialsKey);
-		}
-
-		private void SaveCredentials(string username, string password)
-		{
-			NSUserDefaults.StandardUserDefaults.SetString (username, UsernameKey);
-			NSUserDefaults.StandardUserDefaults.SetString (password, PasswordKey);
-		}
-
-		private void ClearCredentials()
-		{
-			NSUserDefaults.StandardUserDefaults.SetString ("", UsernameKey);
-			NSUserDefaults.StandardUserDefaults.SetString ("", PasswordKey);
+			statusElement.Value = "Login Started";
+			this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password);
+			statusElement.Value = "Login ended";
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			NavigationItem.SetBackButton("Zurück");
+			this.loginService.LoginStarted += (sender, e) => { 
+				Console.WriteLine ("Login Started");
+			};
+			this.loginService.LoginEnded += (bool success) => 
+			{
+				if(success)
+				{
+					if (this.credentialsStore.ShouldRememberCredentials) {
+						this.credentialsStore.Username = username.Value;
+						this.credentialsStore.Password = password.Value;
+					}
+					NavigationController.PushViewController(new RemainingPromotionsController(), false);
+				}
+			};
 		}
 	}
 }

@@ -12,12 +12,10 @@ namespace AldiAccountOverview.iOS
 
 		string[] tableItems;
 		string cellIdentifier = "TableCell";
-		UIViewController parent;
 
-		public RemainingPromotionsSource (string[] items, UIViewController parent)
+		public RemainingPromotionsSource (string[] items)
 		{
 			tableItems = items;
-			this.parent = parent;
 		}
 
 		public override nint RowsInSection (UITableView tableview, nint section)

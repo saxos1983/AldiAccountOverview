@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using MonoTouch.Dialog;
+using AldiAccountOverview.Core;
 
 namespace AldiAccountOverview.iOS
 {
@@ -50,7 +51,7 @@ namespace AldiAccountOverview.iOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary options)
 		{
-			var loginViewController = new LoginViewController();
+			var loginViewController = new LoginViewController(new iOSCredentialsStore(), new LoginService());
 
 			navCtrl = new UINavigationController (loginViewController);
 
