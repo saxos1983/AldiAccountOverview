@@ -17,9 +17,9 @@ namespace AldiAccountOverview.Core
 
 		public async Task<bool> Login (string username, string password)
 		{
-			this.LoginStarted (this, EventArgs.Empty);
-			await Task.Delay(2000);
-			this.LoginEnded (true);
+			//this.LoginStarted (this, EventArgs.Empty);
+			await Task.Delay(20000);
+			//this.LoginEnded (true);
 
 			return true;
 		}

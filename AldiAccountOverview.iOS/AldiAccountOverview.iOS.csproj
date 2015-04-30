@@ -116,6 +116,7 @@
     <Compile Include="TinyIoC.cs" />
     <None Include="packages.config" />
     <Compile Include="Views\DialogElements\UpdateableStringElement.cs" />
+    <Compile Include="Views\LoadingOverlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />

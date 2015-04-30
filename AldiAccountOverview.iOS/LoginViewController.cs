@@ -9,6 +9,8 @@ using Foundation;
 using UIKit;
 using AldiAccountOverview.Core;
 using MonoTouch.Dialog;
+using System.Threading.Tasks;
+using CoreGraphics;
 
 namespace AldiAccountOverview.iOS
 {
@@ -50,31 +52,66 @@ namespace AldiAccountOverview.iOS
 			};
 		}
 
-		private void Login()
+		Action cancelButtonClicked =() => Console.WriteLine ("cancelButtonClicked");
+
+		private async void Login()
 		{
-			this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password);
-			Console.WriteLine ("HELLO");
+			statusElement.UpdateValue("Login Started");
+			LoadingOverlay loadingOverlay = new LoadingOverlay (UIScreen.MainScreen.Bounds, "Logging in...", cancelButtonClicked, "Cancel");
+			this.View.Add (loadingOverlay);
+
+			// If you are not awaiting the login task and use continue with, you need to use BeginInvokeOnMainThread
+			// because you are most probably executing the continuation from a background thread and the UI will not update.
+			// NOTE: If you pass TaskScheduler.FromCurrentSynchronizationContext() in the continuation, then the sync context
+			// of the UI thread will be used and BeginInvokeOnMainThread will not be needed anymore.
+
+//			this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password)
+//				.ContinueWith(t => 
+//					{
+//						BeginInvokeOnMainThread(() => {
+//							statusElement.UpdateValue("Login ended. Successful: " + t.Result);
+//						});
+//					}/*, TaskScheduler.FromCurrentSynchronizationContext()*/);
+
+			// Here we are awaiting the login task. InvokeOnMainThread is not required because when an awaited task 
+			// completes the method continues on the calling thread (UI Thread).
+
+			bool result = await this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password);
+			statusElement.UpdateValue("Login ended. Successful: " + result);
+			loadingOverlay.Hide ();
+			SaveCredentialsIfRequested ();
+			NavigationController.PushViewController (new RemainingPromotionsController (), false);
+			Console.WriteLine ("Exiting Login Method.");
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			NavigationItem.SetBackButton("Zurück");
-			this.loginService.LoginStarted += (sender, e) => { 
-				statusElement.UpdateValue("Login Started");
-			};
-			this.loginService.LoginEnded += (bool success) => 
-			{
-				statusElement.UpdateValue("Login ended. Successful: " + success);
-				if(success)
-				{
-					if (this.credentialsStore.ShouldRememberCredentials) {
-						this.credentialsStore.Username = username.Value;
-						this.credentialsStore.Password = password.Value;
-					}
-					NavigationController.PushViewController(new RemainingPromotionsController(), false);
-				}
-			};
+			NavigationItem.SetBackButton("Back");
+
+			// I am not using the event based mechanism for the login anymore.
+			// Commented code just for the learning reference.
+
+//			this.loginService.LoginStarted += (sender, e) => { 
+//				statusElement.UpdateValue("Login Started");
+//			};
+//			this.loginService.LoginEnded += (bool success) => 
+//			{
+//				statusElement.UpdateValue("Login ended. Successful: " + success);
+//				if(success)
+//				{
+//					SaveCredentialsIfRequested ();
+//					NavigationController.PushViewController (new RemainingPromotionsController (), false);
+//				}
+//			};
+		}
+
+		void SaveCredentialsIfRequested ()
+		{
+			if (this.credentialsStore.ShouldRememberCredentials) {
+				this.credentialsStore.Username = username.Value;
+				this.credentialsStore.Password = password.Value;
+			}
 		}
 	}
 }
