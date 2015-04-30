@@ -5,7 +5,7 @@ namespace AldiAccountOverview.Core
 {
 	public interface ILoginService
 	{
-		bool Login(string username, string password);
+		Task<bool> Login(string username, string password);
 		bool Logout();
 
 		event EventHandler LoginStarted;

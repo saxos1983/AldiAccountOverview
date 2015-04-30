@@ -1,10 +1,28 @@
 ﻿<Properties StartupItem="AldiAccountOverview.iOS/AldiAccountOverview.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.1" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" ActiveRuntime="Mono 4.0.0" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AldiAccountOverview.iOS/AppDelegate.cs">
     <Files>
-      <File FileName="AldiAccountOverview.iOS/Main.cs" Line="1" Column="1" />
-      <File FileName="AldiAccountOverview.iOS/AppDelegate.cs" Line="58" Column="1" />
+      <File FileName="AldiAccountOverview.iOS/Main.cs" Line="5" Column="9" />
+      <File FileName="AldiAccountOverview.iOS/AppDelegate.cs" Line="54" Column="85" />
+      <File FileName="AldiAccountOverview.Core/Services/ILoginService.cs" Line="1" Column="1" />
+      <File FileName="AldiAccountOverview.Core/Services/LoginService.cs" Line="21" Column="4" />
+      <File FileName="AldiAccountOverview.iOS/LoginViewController.cs" Line="60" Column="28" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="AldiAccountOverview" expanded="True">
+            <Node name="AldiAccountOverview.Core" expanded="True" selected="True">
+              <Node name="Services" expanded="True" />
+            </Node>
+            <Node name="AldiAccountOverview.iOS" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Services" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

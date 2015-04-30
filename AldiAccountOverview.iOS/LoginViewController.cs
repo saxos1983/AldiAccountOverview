@@ -8,6 +8,7 @@ using MonoTouch.Dialog;
 using Foundation;
 using UIKit;
 using AldiAccountOverview.Core;
+using MonoTouch.Dialog;
 
 namespace AldiAccountOverview.iOS
 {
@@ -16,7 +17,7 @@ namespace AldiAccountOverview.iOS
 		EntryElement username, password;
 		bool saveCredentials;
 		BooleanElement remeberMeBooleanElement;
-		StringElement statusElement;
+		UpdateableStringElement statusElement;
 
 		ICredentialsStore credentialsStore;
 		ILoginService loginService;
@@ -36,7 +37,7 @@ namespace AldiAccountOverview.iOS
 				}, new Section() {
 					(remeberMeBooleanElement = new BooleanElement("Remember me", this.credentialsStore.ShouldRememberCredentials)),
 					new StringElement("Login", Login),
-					(statusElement = new StringElement("Status: ", "Ready")),
+					(statusElement = new UpdateableStringElement("Status: ", "Ready")),
 				}
 			};
 
@@ -51,9 +52,8 @@ namespace AldiAccountOverview.iOS
 
 		private void Login()
 		{
-			statusElement.Value = "Login Started";
 			this.loginService.Login (this.credentialsStore.Username, this.credentialsStore.Password);
-			statusElement.Value = "Login ended";
+			Console.WriteLine ("HELLO");
 		}
 
 		public override void ViewDidLoad ()
@@ -61,10 +61,11 @@ namespace AldiAccountOverview.iOS
 			base.ViewDidLoad ();
 			NavigationItem.SetBackButton("Zurück");
 			this.loginService.LoginStarted += (sender, e) => { 
-				Console.WriteLine ("Login Started");
+				statusElement.UpdateValue("Login Started");
 			};
 			this.loginService.LoginEnded += (bool success) => 
 			{
+				statusElement.UpdateValue("Login ended. Successful: " + success);
 				if(success)
 				{
 					if (this.credentialsStore.ShouldRememberCredentials) {

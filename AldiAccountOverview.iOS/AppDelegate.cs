@@ -48,10 +48,13 @@ namespace AldiAccountOverview.iOS
         public override void WillTerminate(UIApplication application)
         {
         }
-
+	
 		public override bool FinishedLaunching (UIApplication application, NSDictionary options)
 		{
-			var loginViewController = new LoginViewController(new iOSCredentialsStore(), new LoginService());
+			Bootstrapper.Initialize ();
+
+			var loginViewController = TinyIoC.TinyIoCContainer.Current.Resolve<LoginViewController> ();
+			//var loginViewController = new LoginViewController(new iOSCredentialsStore(), new LoginService());
 
 			navCtrl = new UINavigationController (loginViewController);
 

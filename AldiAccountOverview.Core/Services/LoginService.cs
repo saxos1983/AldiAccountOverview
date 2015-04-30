@@ -15,15 +15,12 @@ namespace AldiAccountOverview.Core
 
 		public event LoginEndedDelegate LoginEnded;
 
-		public bool Login (string username, string password)
+		public async Task<bool> Login (string username, string password)
 		{
 			this.LoginStarted (this, EventArgs.Empty);
-
-			for(int i = 1; i < 1000000; i++)
-			{
-			}
-
+			await Task.Delay(2000);
 			this.LoginEnded (true);
+
 			return true;
 		}
 

@@ -112,16 +112,13 @@
     </Compile>
     <Compile Include="Helpers\NavigationHelpers.cs" />
     <Compile Include="Services\iOSCredentialsStore.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="TinyIoC.cs" />
+    <None Include="packages.config" />
+    <Compile Include="Views\DialogElements\UpdateableStringElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Xml" />
-    <Reference Include="Xamarin.iOS" />
-    <Reference Include="MonoTouch.Dialog-1" />
-    <Reference Include="System.Core" />
-    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
@@ -134,11 +131,20 @@
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\DialogElements\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AldiAccountOverview.Core\AldiAccountOverview.Core.csproj">
       <Project>{66B7C9D1-EA4D-4EBD-8F96-081A6EAFA2A2}</Project>
       <Name>AldiAccountOverview.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="MonoTouch.Dialog-1" />
   </ItemGroup>
 </Project>
