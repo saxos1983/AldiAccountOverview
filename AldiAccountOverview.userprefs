@@ -1,26 +1,35 @@
 ﻿<Properties StartupItem="AldiAccountOverview.iOS/AldiAccountOverview.iOS.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" ActiveRuntime="Mono 4.0.0" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.1" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AldiAccountOverview.iOS/AppDelegate.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.IPhone6.8.1" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AldiAccountOverview.iOS/LoginViewController.cs">
     <Files>
-      <File FileName="AldiAccountOverview.iOS/Main.cs" Line="5" Column="9" />
-      <File FileName="AldiAccountOverview.iOS/AppDelegate.cs" Line="54" Column="85" />
-      <File FileName="AldiAccountOverview.Core/Services/ILoginService.cs" Line="1" Column="1" />
-      <File FileName="AldiAccountOverview.Core/Services/LoginService.cs" Line="21" Column="4" />
-      <File FileName="AldiAccountOverview.iOS/LoginViewController.cs" Line="60" Column="28" />
+      <File FileName="AldiAccountOverview.iOS/LoginViewController.cs" Line="95" Column="17" />
+      <File FileName="AldiAccountOverview.Core/Services/LoginService.cs" Line="22" Column="6" />
+      <File FileName="AldiAccountOverview.iOS/Views/DialogElements/UpdateableStringElement.cs" Line="15" Column="4" />
+      <File FileName="AldiAccountOverview.Core/Services/ILoginService.cs" Line="9" Column="77" />
+      <File FileName="AldiAccountOverview.iOS/Views/LoadingOverlay.cs" Line="68" Column="29" />
+      <File FileName="AldiAccountOverview.iOS/Main.cs" Line="14" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AldiAccountOverview" expanded="True">
-            <Node name="AldiAccountOverview.Core" expanded="True" selected="True">
+            <Node name="AldiAccountOverview.Core" expanded="True">
+              <Node name="References" expanded="True" />
               <Node name="Services" expanded="True" />
             </Node>
             <Node name="AldiAccountOverview.iOS" expanded="True">
               <Node name="References" expanded="True" />
               <Node name="Services" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="DialogElements" expanded="True" />
+              </Node>
+              <Node name="LoginViewController.cs" selected="True" />
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

@@ -3,6 +3,8 @@ using System;
 
 using Foundation;
 using UIKit;
+using System.Collections.Generic;
+using AldiAccountOverview.Core;
 
 namespace AldiAccountOverview.iOS
 {
@@ -10,26 +12,27 @@ namespace AldiAccountOverview.iOS
 	{
 
 
-		string[] tableItems;
-		string cellIdentifier = "TableCell";
+		IList<Promotion> promotions;
 
-		public RemainingPromotionsSource (string[] items)
+		public RemainingPromotionsSource (IList<Promotion> promotions)
 		{
-			tableItems = items;
+			this.promotions = promotions;
 		}
 
 		public override nint RowsInSection (UITableView tableview, nint section)
 		{
-			return tableItems.Length;
+			return promotions.Count;
 		}
-		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
+
+		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 		{
-			UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
-			// if there are no cells to reuse, create a new one
-			if (cell == null)
-				cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
-			cell.TextLabel.Text = tableItems[indexPath.Row];
-			cell.BackgroundColor = UIColor.Cyan;
+			var promotion = promotions [indexPath.Row];
+			var cell = (PromotionCell)tableView.DequeueReusableCell (PromotionCell.Key);
+			if (cell == null) {
+				cell = PromotionCell.Create ();
+			}
+			cell.Model = promotion;
+
 			return cell;
 		}
 
@@ -38,6 +41,11 @@ namespace AldiAccountOverview.iOS
 			tableView.DeselectRow(indexPath, false);
 			AppDelegate.navCtrl.PopToRootViewController(false);
 			AppDelegate.navCtrl.PushViewController (new TestDataViewController (), false);
+		}
+
+		public override nfloat GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+		{
+			return 72;
 		}
 	}
 }

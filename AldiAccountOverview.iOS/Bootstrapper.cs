@@ -11,6 +11,7 @@ namespace AldiAccountOverview.iOS
 
 			container.Register<ICredentialsStore, iOSCredentialsStore> ();
 			container.Register<ILoginService, LoginService> ();
+			container.Register<IPromotionsService, PromotionService> ();
 		}
 	}
 }

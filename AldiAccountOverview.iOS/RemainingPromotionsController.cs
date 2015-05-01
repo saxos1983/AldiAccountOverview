@@ -3,13 +3,17 @@ using System;
 
 using Foundation;
 using UIKit;
+using AldiAccountOverview.Core;
 
 namespace AldiAccountOverview.iOS
 {
 	public class RemainingPromotionsController : UITableViewController
 	{
-		public RemainingPromotionsController () : base (UITableViewStyle.Grouped)
+		private IPromotionsService promoService;
+
+		public RemainingPromotionsController (IPromotionsService promoService) : base (UITableViewStyle.Grouped)
 		{
+			this.promoService = promoService;
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -27,8 +31,7 @@ namespace AldiAccountOverview.iOS
 			this.Title = "Remaining Promotions";
 
 			// Register the TableView's data source
-			string[] items = new string[] {"SMS 100 pcs", "National 1399mins"};
-			TableView.Source = new RemainingPromotionsSource (items);
+			TableView.Source = new RemainingPromotionsSource (this.promoService.RemainingPromotions());
 		}
 	}
 }

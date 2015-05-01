@@ -95,7 +95,8 @@ namespace AldiAccountOverview.iOS
 			if (result) {
 				statusElement.UpdateValue("Login ended. Successful: " + result);
 				SaveCredentialsIfRequested ();
-				NavigationController.PushViewController (new RemainingPromotionsController (), true);
+				var remainingPromoViewCtrl = TinyIoC.TinyIoCContainer.Current.Resolve<RemainingPromotionsController> ();
+				NavigationController.PushViewController (remainingPromoViewCtrl, true);
 			}
 
 			Console.WriteLine ("Exiting Login Method.");

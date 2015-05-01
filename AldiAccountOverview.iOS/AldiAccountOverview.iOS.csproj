@@ -117,6 +117,10 @@
     <None Include="packages.config" />
     <Compile Include="Views\DialogElements\UpdateableStringElement.cs" />
     <Compile Include="Views\LoadingOverlay.cs" />
+    <Compile Include="Views\Cells\PromotionCell.cs" />
+    <Compile Include="Views\Cells\PromotionCell.designer.cs">
+      <DependentUpon>PromotionCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -128,12 +132,14 @@
   <ItemGroup>
     <InterfaceDefinition Include="TestDataViewController.xib" />
     <InterfaceDefinition Include="MainStoryboard.storyboard" />
+    <InterfaceDefinition Include="Views\Cells\PromotionCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />
     <Folder Include="Views\" />
     <Folder Include="Views\DialogElements\" />
+    <Folder Include="Views\Cells\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AldiAccountOverview.Core\AldiAccountOverview.Core.csproj">
